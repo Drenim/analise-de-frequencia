@@ -1,5 +1,5 @@
 import pprint
-from collections import Counter
+from collections import Counter, OrderedDict
 
 def obtem_linhas(path):
     with open(path, mode="r") as arquivo:
@@ -25,6 +25,17 @@ def frequencia_absoluta(relatorio, contador):
     for simbolo in contador:
         relatorio[simbolo]["Freq. absoluta"] = contador[simbolo]
 
+def constroi_relatorio_ordenado(relatorio, chave):
+    iter_relatorio = relatorio.items()
+    iter_relatorio = sorted(iter_relatorio, key=lambda simbolo: simbolo[1][chave])
+    iter_relatorio = list(iter_relatorio)
+    iter_relatorio.reverse()
+    
+    relatorio_ord = OrderedDict()
+    for simbolo in iter_relatorio:
+        relatorio_ord[simbolo[0]] = simbolo[1]
+
+    return relatorio_ord
 
 def constroi_relatorio(contador):
     relatorio = dict()
@@ -35,7 +46,10 @@ def constroi_relatorio(contador):
     frequencia_absoluta(relatorio, contador)
     percentual_de_frequencia(relatorio, contador)
 
+    relatorio = constroi_relatorio_ordenado(relatorio, "Freq. absoluta")
+
     return relatorio
+
 
 if __name__ == '__main__':
     linhas = obtem_linhas("o-alienista.txt")
