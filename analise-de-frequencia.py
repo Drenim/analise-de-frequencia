@@ -69,7 +69,8 @@ def salva_relatorio(relatorio):
             writer.writerow(row)
 
 if __name__ == '__main__':
-    linhas = obtem_linhas("o-alienista.txt")
+    linhas = obtem_linhas(["textos-para-analise/o-alienista.txt", 
+            "textos-para-analise/dom-casmurro.txt"])
     contador = conta_letras(linhas)
     relatorio = constroi_relatorio(contador)
     pprint.pprint(relatorio)
