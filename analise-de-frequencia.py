@@ -11,7 +11,12 @@ def conta_letras(linhas):
     contador = Counter()
 
     for linha in linhas:
-        contador.update(linha.lower())
+        linha_limpa = ''
+        for char in linha:
+            if char.isalpha():
+                linha_limpa += char
+        
+        contador.update(linha_limpa.lower())
 
     return contador
 
@@ -30,7 +35,7 @@ def constroi_relatorio_ordenado(relatorio, chave):
     iter_relatorio = sorted(iter_relatorio, key=lambda simbolo: simbolo[1][chave])
     iter_relatorio = list(iter_relatorio)
     iter_relatorio.reverse()
-    
+
     relatorio_ord = OrderedDict()
     for simbolo in iter_relatorio:
         relatorio_ord[simbolo[0]] = simbolo[1]
