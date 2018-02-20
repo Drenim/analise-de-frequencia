@@ -21,6 +21,10 @@ def percentual_de_frequencia(relatorio, contador):
     for simbolo in contador:
         relatorio[simbolo]["Freq. percentual"] = (contador[simbolo] * 100) / total
 
+def frequencia_absoluta(relatorio, contador):
+    for simbolo in contador:
+        relatorio[simbolo]["Freq. absoluta"] = contador[simbolo]
+
 
 def constroi_relatorio(contador):
     relatorio = dict()
@@ -28,6 +32,7 @@ def constroi_relatorio(contador):
     for simbolo in contador:
         relatorio[simbolo] = dict()
 
+    frequencia_absoluta(relatorio, contador)
     percentual_de_frequencia(relatorio, contador)
 
     return relatorio
