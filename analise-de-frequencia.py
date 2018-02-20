@@ -2,9 +2,11 @@ import pprint
 import csv
 from collections import Counter, OrderedDict
 
-def obtem_linhas(path):
-    with open(path, mode="r") as arquivo:
-        linhas = arquivo.readlines()
+def obtem_linhas(lista_de_paths):
+    linhas = []
+    for path in lista_de_paths:
+        with open(path, mode="r") as arquivo:
+            linhas += arquivo.readlines()
     
     return linhas
 
