@@ -1,4 +1,5 @@
 import pprint
+import csv
 from collections import Counter, OrderedDict
 
 def obtem_linhas(path):
@@ -55,12 +56,22 @@ def constroi_relatorio(contador):
 
     return relatorio
 
+def salva_relatorio(relatorio):
+    with open("relatorio.csv", mode="w", newline="") as arquivo:
+        writer = csv.writer(arquivo)
+        writer.writerow(["Simbolo", "Freq. absoluta", "Freq. percentual"])
+        
+        for simbolo in relatorio:
+            row = [simbolo, relatorio[simbolo]["Freq. absoluta"], 
+                relatorio[simbolo]["Freq. percentual"]]
+            writer.writerow(row)
 
 if __name__ == '__main__':
     linhas = obtem_linhas("o-alienista.txt")
     contador = conta_letras(linhas)
-    pprint.pprint(constroi_relatorio(contador))
-
+    relatorio = constroi_relatorio(contador)
+    pprint.pprint(relatorio)
+    salva_relatorio(relatorio)
 
 
 
