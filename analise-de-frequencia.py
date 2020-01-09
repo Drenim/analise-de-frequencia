@@ -1,6 +1,8 @@
 import pprint
 import csv
+import matplotlib.pyplot as plt
 from collections import Counter, OrderedDict
+import estatistica
 
 
 def obtem_linhas(lista_de_paths):
@@ -83,3 +85,8 @@ if __name__ == '__main__':
     relatorio = constroi_relatorio(contador)
     pprint.pprint(relatorio)
     salva_relatorio(relatorio)
+
+    chaves = [i for i in relatorio]
+    amostra = [relatorio[i]["Freq. absoluta"] for i in relatorio]
+    plt.plot(chaves, amostra)
+    plt.show()
